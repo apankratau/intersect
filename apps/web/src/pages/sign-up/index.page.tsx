@@ -26,11 +26,7 @@ import { RoutePath } from 'routes';
 
 import { EMAIL_REGEX, PASSWORD_REGEX } from 'app-constants';
 
-import { GoogleIcon } from 'public/icons';
-
 const schema = z.object({
-  firstName: z.string().min(1, 'Please enter First name').max(100),
-  lastName: z.string().min(1, 'Please enter Last name').max(100),
   email: z.string().regex(EMAIL_REGEX, 'Email format is incorrect.'),
   password: z.string().regex(PASSWORD_REGEX, 'The password must contain 6 or more characters with at least one letter (a-z) and one number (0-9).'),
 });
@@ -154,22 +150,6 @@ const SignUp: NextPage = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={20}>
               <TextInput
-                {...register('firstName')}
-                label="First Name"
-                maxLength={100}
-                placeholder="First Name"
-                error={errors.firstName?.message}
-              />
-
-              <TextInput
-                {...register('lastName')}
-                label="Last Name"
-                maxLength={100}
-                placeholder="Last Name"
-                error={errors.lastName?.message}
-              />
-
-              <TextInput
                 {...register('email')}
                 label="Email Address"
                 placeholder="Email Address"
@@ -204,15 +184,6 @@ const SignUp: NextPage = () => {
         </Stack>
 
         <Stack gap={34}>
-          <Button
-            component="a"
-            leftSection={<GoogleIcon />}
-            href={`${config.API_URL}/account/sign-in/google/auth`}
-            variant="outline"
-          >
-            Continue with Google
-          </Button>
-
           <Group fz={16} justify="center" gap={12}>
             Have an account?
             <Link
